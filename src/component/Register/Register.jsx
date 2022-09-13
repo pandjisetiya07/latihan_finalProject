@@ -88,19 +88,18 @@ const klikDaftar = () =>{
 
   axios.post('https://631843e9f6b281877c677851.mockapi.io/register', data)
   .then(result => {
-    if(result) {
-      if(result.data){
-        <div className="alert alert-primary">
-              <p>{alert}</p>
-            </div>
-      }
+    console.log(result.status)
+    if(result.status === 201) {
+     alert('berhasil register')
+    }else{
+      alert('tidak berhasil register')
     }
   })
 }
 
   return (
     <>
-    <div className="maincontainer">
+       <div className="maincontainer">
         <div className="container-fluid">
           <div className="row no-gutter">
             <div className="col-md-6 d-none d-md-flex bg-image"></div>
@@ -245,13 +244,10 @@ const klikDaftar = () =>{
                         </p>
                         </div>
                         <div className="d-grid gap-2 mt-2">
-                          {/* <button type="submit" className="btn btn-primary btn-block text-uppercase mb-2 rounded-pill shadow-sm">
-                            Sign up
-                          </button> */}
-                           <button onClick={klikDaftar} disabled={!validName || !validEmail || !validPwd || !validMatch ? true : false}
+                        <button onClick={klikDaftar} disabled={!validName || !validEmail || !validPwd || !validMatch ? true : false}
                            className="btn btn-primary btn-block text-uppercase mb-2 rounded-pill shadow-sm">
                             Sign Up
-                          </button>
+                          </button> 
                         </div>
 
                         <div className="text-center d-flex justify-content-between mt-4"></div>

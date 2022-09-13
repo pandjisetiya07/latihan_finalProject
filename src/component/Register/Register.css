@@ -37,6 +37,13 @@
   bottom: -10px;
 }
 
+.maincontainer{
+  text-align: center;
+  justify-content: center;
+  display: flex; 
+  padding-top: 90px;
+  padding-bottom: 90px;
+}
 .instructions > svg {
   margin-right: 0.25rem;
 }
@@ -57,7 +64,7 @@
 
 .invalid {
   color: red;
-  margin-left: 0.25rem;
+  margin-left: 0.25rem; 
 }
 
 .errmsg {
