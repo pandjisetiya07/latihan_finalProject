@@ -1,16 +1,18 @@
 .footer {
   width: 100%;
   padding: 2rem 0;
-  background-color: gray;
-  color: black;
-  
+  background-color: #095266;
+  color: #fff;
 }
 
 .footer h3 {
-  color: var(--primary-light);
-  font-family: Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;
+  font-family:'Times New Roman', Times, serif
 }
 
+.footer h6 {
+  font-family: 'Times New Roman', Times, serif;
+  align-items: center;
+}
 .footer .top, .bottom {
   display: flex;
   width: 100%;
@@ -26,19 +28,6 @@
 
 .footer .icon {
  color: var(--primary-light);
-}
-
-.footer .left, .right {
-  display: flex;
-  align-items: center;
-}
-
-.footer ul {
-  display: flex;
-}
-
-.footer li {
-  padding: .5rem;
 }
 
 @media screen and (max-width: 1140px) {

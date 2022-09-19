@@ -1,13 +1,6 @@
-.background{
-    background-image: url(../../assets/background/bg2.jpg);
-    background-position: center;
-    background-size: cover;
-    height: 100vh;
-    width: 100%;
-}
 
 .nav-item .nav-link{
-    color: rgb(0, 0, 0);
+    /* color: rgb(0, 0, 0); */
     font-weight: bold;
     font-size: 18px;
     border-radius: 20px;
@@ -24,4 +17,8 @@
     border: 3px solid white;
     width: 50%;
     justify-content: flex-end;
+}
+
+.navbarr {
+    background-color: #095266;
 }
