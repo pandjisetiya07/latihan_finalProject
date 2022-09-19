@@ -7,6 +7,7 @@ import Transaksi from "./component/Transaksi/Transaksi";
 import Login from "./component/Login/Login";
 import Footer from "./component/Footer/Footer";
 import Register from "./component/Register/Register";
+import ConfirmTransaksi from "./component/Transaksi/ConfirmTransaksi";
 function App() {
   return (
     <>
@@ -18,6 +19,7 @@ function App() {
         <Route path="transaksi/:tujuan/:id" element={<Transaksi />} />
         <Route path="Login" element={<Login />} />
         <Route path="Register" element={<Register />} />
+        <Route path="ConfirmTrnasaksi" element={<ConfirmTransaksi />} />
       </Routes>
       <Footer />
     </>

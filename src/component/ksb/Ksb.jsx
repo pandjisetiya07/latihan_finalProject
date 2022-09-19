@@ -11,79 +11,81 @@ import { useNavigate } from 'react-router-dom'
 
 function Ksb() {
 
-  const navigate =  useNavigate()
+  const navigate = useNavigate()
   const [show, setShow] = useState(false);
   const handleClose = () => setShow(false);
   // const handleShow = () => setShow(true);
-  const [modalReact, setModalReact] = useState({}) 
+  const [modalReact, setModalReact] = useState({})
 
   const [DataSumbawa, setMyDataSumbawa] = useState([]);
 
-  const getApiDataSumbawa = async () =>{
+  const getApiDataSumbawa = async () => {
     const dataSumbawa = await axios.get("https://631843e9f6b281877c677851.mockapi.io/sumbawa_barat");
-          setMyDataSumbawa(dataSumbawa.data)      
+    setMyDataSumbawa(dataSumbawa.data)
   }
 
   const trasnferDataModal = (data) => {
     setModalReact(data)
     setShow(true)
-  } 
+  }
 
   const handleBook = (id) => {
-    navigate(`/transaksi/SumbawaBarat/${id}`) 
+    navigate(`/transaksi/SumbawaBarat/${id}`)
   }
 
   useEffect(() => {
-   getApiDataSumbawa()
+    getApiDataSumbawa()
   }, [])
 
   return (
     <>
       <NavBar />
       <div className='container' >
-          <div className="row">
+        <div className="row">
 
-      {DataSumbawa.map((get) => {
-        const { id, namaTempat, lokasi, images, price, Deskipsi } = get;
+          {DataSumbawa.map((get) => {
+            const { id, namaTempat, lokasi, images, price, Deskipsi } = get;
 
-        return(
-        
-            <div key={id} className="col-lg-4 col-md-6 col-sm-6 py-3">
-              <Card >
-                <Card.Img className='img' variant="top" src={images} />
-                <Card.Body>
-                  <Card.Title>{namaTempat}</Card.Title>
-                  <Card.Text>
-                    <p>{lokasi}</p>
-                    <p>{price}</p>
-                  </Card.Text>
-                </Card.Body>
-                <Card.Footer>
-                  <Button variant="primary" onClick={() => trasnferDataModal(
-                    { id, namaTempat, lokasi, images, price, Deskipsi }
-                  )}>
-                    Detail Destinasi
-                  </Button>
+            return (
 
-                </Card.Footer>
-              </Card>
-            </div>
-            
-        )
-      })}
-                  <Modal show={show} onHide={handleClose} animation={false}>
-                    <Modal.Header closeButton>
-                      <Modal.Title>{modalReact.namaTempat}</Modal.Title>
-                    </Modal.Header>
-                    <Modal.Body>{modalReact.Deskipsi}</Modal.Body>
-                    <Modal.Footer>
-                      <Button variant="primary" onClick={()=>handleBook(modalReact.id)}>
-                      Booking Ticket
-                      </Button>
-                    </Modal.Footer>
-                  </Modal>
-       </div>
+              <div key={id} className="col-lg-4 col-md-6 col-sm-6 py-3">
+                <Card >
+                  <Card.Img className='img' variant="top" src={images} />
+                  <Card.Body>
+                    <Card.Title>{namaTempat}</Card.Title>
+                    <Card.Text>
+                      {lokasi}
+                    </Card.Text>
+                    <Card.Text>
+                      {price}
+                    </Card.Text>
+                  </Card.Body>
+                  <Card.Footer>
+                    <Button variant="primary" onClick={() => trasnferDataModal(
+                      { id, namaTempat, lokasi, images, price, Deskipsi }
+                    )}>
+                      Detail Destinasi
+                    </Button>
+
+                  </Card.Footer>
+                </Card>
+              </div>
+
+            )
+          })}
+          <Modal show={show} onHide={handleClose} animation={false}>
+            <Modal.Header closeButton>
+              <Modal.Title>{modalReact.namaTempat}</Modal.Title>
+            </Modal.Header>
+            <Modal.Body>{modalReact.Deskipsi}</Modal.Body>
+            <Modal.Footer>
+              <Button variant="primary" onClick={() => handleBook(modalReact.id)}>
+                Booking Ticket
+              </Button>
+            </Modal.Footer>
+          </Modal>
         </div>
+      </div>
     </>
   )
 }

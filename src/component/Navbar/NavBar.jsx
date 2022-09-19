@@ -49,8 +49,7 @@ function NavBar() {
               </Nav.Link>
               {
                 isLogin ?
-                  // <button >Log Out</button>
-                  <Nav.Link onClick={handleLogout}>Log Out</Nav.Link>
+                <Nav.Link onClick={handleLogout}>Log Out</Nav.Link>
                 :
                   <Nav.Link href="/Login">
                 Login

@@ -5,8 +5,7 @@ import Form from 'react-bootstrap/Form';
 import Navbar from '../Navbar/NavBar';
 import axios from 'axios';
 import { useParams } from 'react-router-dom'
-import DatePicker from 'react-datepicker'
-import 'react-datepicker/dist/react-datepicker.css'
+import Swal from "sweetalert2";
 
 
 function Transaksi() {
@@ -17,7 +16,6 @@ function Transaksi() {
   const [destinasiSumbawaBarat, setDestinasiSumbawaBarat] = useState([]);
   const [stateTransaksi, setStateTransaksi] = useState({});
   const { tujuan, id } = useParams();
-  const [selectedDate, setselectedDate] = useState(null)
 
   const handleChange = (event) => {
     setDestinationSelect(event.target.value);
@@ -35,6 +33,7 @@ function Transaksi() {
   useEffect(() => {
     fetchPromise()
     filteretSumbawa()
+    filteretSumbawaBarat()
     setDestinationSelect(tujuan)
   }, []);
 
@@ -51,7 +50,48 @@ function Transaksi() {
     console.log(selectTransaksi);
   }
 
+  const filteretSumbawaBarat = () => {
+    const selectTransaksi = destinasiSumbawaBarat.filter((destinasiSbwBarat) => {
+      return destinasiSbwBarat.id === id
+    })
+    setStateTransaksi(selectTransaksi)
+    console.log(selectTransaksi);
+  }
 
+  const [user, setUser] = useState('');
+  const [address, setAdress] = useState('');
+  const [email, setEmail] = useState('');
+  const [handphone, setHandphone] = useState('');
+
+  const biodata = (e) => {
+    e.preventDefault()
+    const data = {
+      user: user,
+      address: address,
+      email: email,
+      handphone: handphone
+    }
+    console.log(data);
+
+    axios.post('https://631843e9f6b281877c677851.mockapi.io/register', data)
+    .then(result => {
+      console.log(result.status)
+      if (result.status === 201) {
+        Swal.fire({
+          title: "Good job!",
+          text: "Berhasil Register ",
+          icon: "success",
+          button: "Aww yiss!",
+        }).then((result) => {
+          if (result.value) {
+            window.location.href = `/Login`
+          }
+        })
+      } else {
+        alert('tidak berhasil register')
+      }
+    })
+  }
 
   return (
     <>
@@ -61,16 +101,44 @@ function Transaksi() {
           <div className="right">
             <h4>Biodata Diri</h4>
             <div className="mb-3">
-              <input id="inputNamaLengkap" type="nama" placeholder="Nama Lengkap" required="" autoFocus="" className="form-control rounded-pill border-0 shadow-sm px-4" />
+              <input
+                id="inputNamaLengkap"
+                type="nama"
+                placeholder="Nama Lengkap"
+                onChange={(e) => setUser(e.target.value)}
+                required=""
+                autoFocus=""
+                className="form-control rounded-pill border-0 shadow-sm px-4" />
             </div>
             <div className="mb-3">
-              <input id="inputAlamat" type="alamat" placeholder="Alamat" required="" autoFocus="" className="form-control rounded-pill border-0 shadow-sm px-4" />
+              <input
+                id="inputAlamat"
+                type="alamat"
+                placeholder="Alamat"
+                onChange={(e) => setAdress(e.target.value)}
+                required=""
+                autoFocus=""
+                className="form-control rounded-pill border-0 shadow-sm px-4" />
             </div>
             <div className="mb-3">
-              <input id="inputEmail" type="email" placeholder="Email Addres" required="" autoFocus="" className="form-control rounded-pill border-0 shadow-sm px-4" />
+              <input
+                id="inputEmail"
+                type="email"
+                placeholder="Email Addres"
+                onChange={(e) => setEmail(e.target.value)}
+                required=""
+                autoFocus=""
+                className="form-control rounded-pill border-0 shadow-sm px-4" />
             </div>
             <div className="mb-3">
-              <input id="inputNoHandphone" type="handphone" placeholder="No Handphone" required="" autoFocus="" className="form-control rounded-pill border-0 shadow-sm px-4" />
+              <input
+                id="inputNoHandphone"
+                type="handphone"
+                placeholder="No Handphone"
+                onChange={(e) => setHandphone(e.target.value)}
+                required=""
+                autoFocus=""
+                className="form-control rounded-pill border-0 shadow-sm px-4" />
             </div>
           </div>
 
@@ -114,16 +182,11 @@ function Transaksi() {
                   <option>Camping</option>
                 </Form.Select>
               </Form.Group>
-              <Form.Group className="mb-3" controlId="formBasicPassword">
-                <Form.Label>Choose Ticket Travel</Form.Label>
-               <DatePicker
-                selected={selectedDate}
-                  onChange={date => setselectedDate(date)}
-                  dateFormat='dd/MM/yyyy'
-                  minDate={new Date()}
-               />
+              <Form.Group className="mb-3 form-trs">
+                <Form.Label htmlFor="">Choose Ticket </Form.Label>
+                <input type="date"></input>
               </Form.Group>
-              <Button type="submit">CHECKOUT</Button>
+              <Button type="submit" onClick={biodata} >CHECKOUT</Button>
             </fieldset>
           </Form>
         </div>

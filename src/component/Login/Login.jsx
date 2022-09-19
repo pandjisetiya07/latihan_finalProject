@@ -22,7 +22,7 @@ function Login() {
        if (data1){
         Swal.fire({
             title: "Good job!",
-            text: "Berhasil Login ",    
+            text: "Berhasil Register ",
             icon: "success",
             button: `/Login`,
           })
@@ -49,7 +49,7 @@ function Login() {
     }, [email])
 
     useEffect(() => {
-        // console.log(isLogin, ' ini is loginnnn');
+        console.log(isLogin, ' ini is loginnnn');
     },[isLogin])
 
    if (isLogin) {
