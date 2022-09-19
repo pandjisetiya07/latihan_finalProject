@@ -6,11 +6,12 @@ import Modal from 'react-bootstrap/Modal'
 import { useState, useEffect } from 'react';
 import axios from 'axios';
 import './ksb.css'
-import { Link } from 'react-router-dom'
+import { useNavigate } from 'react-router-dom'
 
 
 function Ksb() {
 
+  const navigate =  useNavigate()
   const [show, setShow] = useState(false);
   const handleClose = () => setShow(false);
   // const handleShow = () => setShow(true);
@@ -27,6 +28,10 @@ function Ksb() {
     setModalReact(data)
     setShow(true)
   } 
+
+  const handleBook = (id) => {
+    navigate(`/transaksi/SumbawaBarat/${id}`) 
+  }
 
   useEffect(() => {
    getApiDataSumbawa()
@@ -72,11 +77,9 @@ function Ksb() {
                     </Modal.Header>
                     <Modal.Body>{modalReact.Deskipsi}</Modal.Body>
                     <Modal.Footer>
-                    <Link to="/transaksi">
-                      <Button variant="primary" onClick={handleClose}>
+                      <Button variant="primary" onClick={()=>handleBook(modalReact.id)}>
                       Booking Ticket
                       </Button>
-                      </Link>
                     </Modal.Footer>
                   </Modal>
        </div>

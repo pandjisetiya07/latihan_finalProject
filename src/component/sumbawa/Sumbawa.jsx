@@ -7,6 +7,7 @@ import { useState, useEffect } from 'react';
 import axios from 'axios';
 import './sumbawa.css'
 import { useNavigate } from 'react-router-dom'
+import {CheckLogin} from "../../helpers/checkLogin"
 
 function Sumbawa() {
 
@@ -17,6 +18,7 @@ function Sumbawa() {
   const [modalReact, setModalReact] = useState({})
 
   const [DataSumbawa, setMyDataSumbawa] = useState([]);
+   const {isLogin} = CheckLogin()
 
   const getApiDataSumbawa = async () => {
     const dataSumbawa = await axios.get("https://631843e9f6b281877c677851.mockapi.io/sumbawa");
@@ -36,57 +38,65 @@ function Sumbawa() {
     getApiDataSumbawa()
   }, [])
 
-  return (
-    <>
-      <div className='bgsumbawa'>
-        <NavBar />
-        <div className='container' >
-          <div className="row">
+useEffect(() => {
 
-            {DataSumbawa.map((get) => {
-              const { id, namaTempat, lokasi, images, price, Deskipsi } = get;
+},[isLogin])
 
-              return (
+if(isLogin){
+  navigate('/Sumbawa')
+} else{
+}
+return (
+  <>
+      <NavBar />
+      <div className='container' >
+        <div className="row">
 
-                <div key={id} className="col-lg-4 col-md-6 col-sm-6 py-3">
-                  <Card >
-                    <Card.Img className='img' variant="top" src={images} />
-                    <Card.Body>
-                      <Card.Title>{namaTempat}</Card.Title>
-                      <Card.Text>
-                        <p>{lokasi}</p>
-                        <p>{price}</p>
-                      </Card.Text>
-                    </Card.Body>
-                    <Card.Footer>
-                      <Button variant="primary" onClick={() => trasnferDataModal(
-                        { id, namaTempat, lokasi, images, price, Deskipsi }
-                      )}>
-                        Detail Destinasi
-                      </Button>
+          {DataSumbawa.map((get) => {
+            const { id, namaTempat, lokasi, images, price, Deskipsi } = get;
 
-                    </Card.Footer>
-                  </Card>
-                </div>
+            return (
 
-              )
-            })}
-            <Modal show={show} onHide={handleClose} animation={false}>
-              <Modal.Header closeButton>
-                <Modal.Title>{modalReact.namaTempat}</Modal.Title>
-              </Modal.Header>
-              <Modal.Body>{modalReact.Deskipsi}</Modal.Body>
-              <Modal.Footer>
-                  <Button variant="primary" onClick={()=>handleBook(modalReact.id)}>
-                    Booking Ticket
-                  </Button>
-              </Modal.Footer>
-            </Modal>
-          </div>
+              <div key={id} className="col-lg-4 col-md-6 col-sm-6 py-3">
+                <Card >
+                  <Card.Img className='img' variant="top" src={images} />
+                  <Card.Body>
+                    <Card.Title>{namaTempat}</Card.Title>
+                    <Card.Text>
+                      <p>{lokasi}</p>
+                      <p>{price}</p>
+                    </Card.Text>
+                  </Card.Body>
+                  <Card.Footer>
+                    <Button variant="primary" onClick={() => trasnferDataModal(
+                      { id, namaTempat, lokasi, images, price, Deskipsi }
+                    )}>
+                      Detail Destinasi
+                    </Button>
+
+                  </Card.Footer>
+                </Card>
+              </div>
+
+            )
+          })}
+          <Modal show={show} onHide={handleClose} animation={false}>
+            <Modal.Header closeButton>
+              <Modal.Title>{modalReact.namaTempat}</Modal.Title>
+            </Modal.Header>
+            <Modal.Body>{modalReact.Deskipsi}</Modal.Body>
+            <Modal.Footer>
+                <Button variant="primary" onClick={()=>handleBook(modalReact.id)}>
+                  Booking Ticket
+                </Button>
+            </Modal.Footer>
+          </Modal>
         </div>
       </div>
-    </>
-  )
+  </>
+)
+
+  
 }
 
 export default Sumbawa

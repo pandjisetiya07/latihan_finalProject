@@ -49,7 +49,7 @@ function Login() {
     }, [email])
 
     useEffect(() => {
-        console.log(isLogin, ' ini is loginnnn');
+        // console.log(isLogin, ' ini is loginnnn');
     },[isLogin])
 
    if (isLogin) {
