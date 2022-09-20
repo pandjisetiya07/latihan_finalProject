@@ -102,7 +102,7 @@ function Transaksi() {
           button: "Aww yiss!",
         }).then((result) => {
           if (result.value) {
-            window.location.href = `/Login`
+            window.location.href = `/ConfirmTransaksi`
           }
         })
       } else {

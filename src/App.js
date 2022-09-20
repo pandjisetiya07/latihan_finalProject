@@ -19,7 +19,7 @@ function App() {
         <Route path="transaksi/:tujuan/:id" element={<Transaksi />} />
         <Route path="Login" element={<Login />} />
         <Route path="Register" element={<Register />} />
-        <Route path="ConfirmTrnasaksi" element={<ConfirmTransaksi />} />
+        <Route path="ConfirmTransaksi" element={<ConfirmTransaksi />} />
       </Routes>
       <Footer />
     </>
