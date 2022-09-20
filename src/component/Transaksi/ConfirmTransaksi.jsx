@@ -5,7 +5,7 @@ function ConfirmTransaksi() {
   return (
     <>
     <NavBar/>
-    <h1>Confirm</h1>
+    
     </>
   )
 }

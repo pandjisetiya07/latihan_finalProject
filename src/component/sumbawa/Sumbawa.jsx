@@ -29,13 +29,13 @@ function Sumbawa() {
   }
 
   const handleBook = (id) => {
-    navigate(`/transaksi/SumbawaBesar/${id}`) 
+    navigate(`/transaksi/SumbawaBesar/${id}`, {state: modalReact}) 
   }
 
   useEffect(() => {
     getApiDataSumbawa()
   }, [])
-
+  
   return (
     <>
       <div className='bgsumbawa'>

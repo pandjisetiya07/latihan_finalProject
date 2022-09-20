@@ -30,7 +30,7 @@ function Ksb() {
   }
 
   const handleBook = (id) => {
-    navigate(`/transaksi/SumbawaBarat/${id}`)
+    navigate(`/transaksi/SumbawaBarat/${id}`, {state: modalReact})
   }
 
   useEffect(() => {

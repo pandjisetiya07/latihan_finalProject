@@ -22,7 +22,7 @@ function Login() {
        if (data1){
         Swal.fire({
             title: "Good job!",
-            text: "Berhasil Register ",
+            text: "Berhasil Login",
             icon: "success",
             button: `/Login`,
           })
