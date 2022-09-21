@@ -12,11 +12,16 @@ function ConfirmTransaksi() {
   
   const getBookingTour = async () =>{
     const booking = await axios.get("https://631843e9f6b281877c677851.mockapi.io/register")
-    setBookingRegister(booking.data)
-    console.log(booking);
-
-    const userLogin = localStorage.getItem('login')
-    const userBooking =
+    // console.log(booking.data);
+    
+    const userLogin = JSON.parse(localStorage.getItem('login'))
+    // console.log(userLogin.email)
+    const findUser = booking.data.find(user => {
+      return user.email === userLogin.email
+    })
+    
+    // console.log(findUser, 'ini yang ketemu');
+    setBookingRegister(findUser.transaksi)
   }
 
   useEffect(() => {
@@ -26,19 +31,18 @@ function ConfirmTransaksi() {
   return (
     <>
       <NavBar />
-      {BookingRegister.map((get) => {
-        const { id, user, email, transaksi } = get;
-
+    {
+      BookingRegister.map((get) => {
         return (
-      <div className="container">
-        <div className="row" key={id}>
+      <div className="container" key={get.id}>
+        <div className="row" >
           <div className="col-6">
             <Form.Group as={Row} className="mb-3" controlId="formPlaintextEmail">
               <Form.Label column sm="2">
-               User Login
+               Nama Pemesan
               </Form.Label>
               <Col sm="10">
-                <Form.Control plaintext readOnly defaultValue= {user} />
+                <Form.Control plaintext readOnly defaultValue= {get.dataPemesan.user} />
               </Col>
             </Form.Group>
           </div>
@@ -48,17 +52,17 @@ function ConfirmTransaksi() {
                 Email
               </Form.Label>
               <Col sm="10">
-                <Form.Control plaintext readOnly defaultValue= {email} />
+                <Form.Control plaintext readOnly defaultValue= {get.dataPemesan.email} />
               </Col>
             </Form.Group>
           </div>
           <div className="col-6">
             <Form.Group as={Row} className="mb-3" controlId="formPlaintextEmail">
               <Form.Label column sm="2">
-               Daftar Transaksi
+               Tujuan Wisata
               </Form.Label>
               <Col sm="10">
-                <Form.Control plaintext readOnly defaultValue= {transaksi} />
+                <Form.Control plaintext readOnly defaultValue= {get.pemenasan.tujuan} />
               </Col>
             </Form.Group>
           </div>
@@ -68,14 +72,17 @@ function ConfirmTransaksi() {
                 No Telpon
               </Form.Label>
               <Col sm="10">
-                <Form.Control plaintext readOnly defaultValue="email@example.com" />
+                <Form.Control plaintext readOnly defaultValue={get.dataPemesan.handphone} />
               </Col>
             </Form.Group>
           </div>
         </div>
       </div>
     )
-    })}
+    })
+    }
+
+      
 
     </>
   )
